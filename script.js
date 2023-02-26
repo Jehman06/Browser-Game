@@ -9,36 +9,41 @@ let obstacle = document.createElement("img");
 obstacle.src = "assets/temple-barrel.png";
 obstacle.setAttribute("id", "obstacle");
 document.getElementById("game").append(obstacle);
+obstacle.style.animationDelay = Math.random() * 10 + "s";
+setTimeout(obstacle.style.animationDelay = Math.random() * 10 + "s", 500);
 
 let rock = document.createElement("img");
 rock.src = "assets/temple-rock.png";
-obstacle.setAttribute("id", "rock");
+rock.setAttribute("id", "rock");
 document.getElementById("game").append(rock);
+rock.style.animationDelay = Math.random() * 10 + "s";
+setTimeout(rock.style.animationDelay = Math.random() * 10 + "s", 500);
 
 //Counter/Score
 let counter = document.querySelector('#scoreSpan');
 let count = 0;
+let intervalCount;
 
 function counterStart() {
     count++;
-    counter.innerText = count;
+    counter.innerText = `Score: ${count}`;
     let finalScore = document.querySelector(".scoreSpan");
     finalScore.innerText = `Score: ${count}`;
 }
 
-let intervalCount = setInterval(counterStart, 50)
 
 function stopCount() {
     clearInterval(intervalCount);
+    count = 0
+    counter.innerText = `Score: ${count}`;
 }
 
 //This function starts the game. It goes from the Start Game screen to the Game screen.
 function startGame() {
-    counterStart()
+    intervalCount = setInterval(counterStart, 100)
     this.toggleScreen('start-screen', false);
     this.toggleScreen('game',true)
     this.toggleScreen('game-over-screen', false)
-    counterStart()
 }
 
 function toggleScreen(id, toggle){
@@ -78,11 +83,15 @@ function stop() {
 let gameOver = setInterval(function() {
     let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
     let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
-    if(obstacleLeft < 30 && obstacleLeft >- 30 && characterTop >= 360) {
-        obstacle.style.animation = "none";
-        stop()
-        stopCount()
-        count = 0
-        obstacle.style.animation = "block 1.5s infinite linear";
+    let rockLeft = parseInt(window.getComputedStyle(rock).getPropertyValue('left'));
+    if(obstacleLeft < 30 && obstacleLeft >- 30 && characterTop >= 360 || rockLeft < 5 && rockLeft >- 5 && characterTop >= 360) {
+        obstacle.style.animation = "stopped";
+        rock.style.animation = "stopped";
+        character.src = "assets/temple-dead.gif";
+        stopCount();
+        setTimeout(stop, 1000);
+    } else {
+        obstacle.style.animation = "block 2s infinite linear";
+        rock.style.animation = "block 2s infinite 0.75s linear";
     }
 }, 10);

@@ -1,146 +1,154 @@
 
 body {
-   font-size: 16px;
-   margin: 0px;
-   padding: 0px;
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #af876e;
     font-family: Arial;
-}
+    animation: colorLoop 40s infinite alternate;
+ }
+ 
+ #screen-images {
+     position: fixed;
+     border: 1px solid black;
+     width: 100%;
+     height: 100%;
+ }
+ 
+ #temple-idle {
+     display: block;
+ }
+ 
+ .screen {
+     color: white;
+     padding: 20px;
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     margin-top: -100px;
+     margin-left: -100px;
+     height: 200px;
+     width: 250px;
+     text-align: center;
+ }
+ 
+ button {
+     border: none;
+     appearance: none;
+     outline: none;
+     display: inline-block;
+     font-size: 1.5em;
+     cursor: pointer;
+     text-decoration: none;
+     padding: 12px 48px 12px 48px;
+     border-radius: 4px;
+     color: #ffffff;
+     background-color: #af876e;
+     border: 2px solid #ffffff;
+ }
+ 
+ button:hover {
+     font-size: 1.6em;
+     background-color: #05c46b;
+ }
+ 
+ #start-screen {
+     display: block;
+ }
+ 
+ #game {
+     width: 100%;
+     height: 600px;
+     margin: auto;
+     display: none;
+     position: absolute;
+     background-size: 100%; 
+     animation: backGroundLoop 40s infinite alternate;
+ }
+ 
+ @keyframes backGroundLoop {
+     0% {background-image: url("assets/backgrounds/temple-forest.png");}
+     30% {background-image: url("assets/backgrounds/temple-mountains.png");}
+     60% {background-image: url("assets/backgrounds/temple-desert.png");}
+     100% {background-image: url("assets/backgrounds/temple-background2.png");}
+     /*100% {background-image: url("assets/backgrounds/temple-background.png");}*/
+ }
 
-#screen-images {
-    position: fixed;
-    border: 1px solid black;
-    width: 100%;
-    height: 100%;
-}
-
-#temple-idle {
-    display: block;
-}
-
-.screen {
-    color: white;
-    padding: 20px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -100px;
-    height: 200px;
-    width: 250px;
-    text-align: center;
-}
-
-button {
-    border: none;
-    appearance: none;
-    outline: none;
-    display: inline-block;
-    font-size: 1.5em;
-    cursor: pointer;
-    text-decoration: none;
-    padding: 12px 48px 12px 48px;
-    border-radius: 4px;
-    color: #ffffff;
-    background-color: #af876e;
-    border: 2px solid #ffffff;
-}
-
-button:hover {
-    font-size: 1.6em;
-    background-color: #05c46b;
-}
-
-#start-screen {
-    display: block;
-}
-
-#game {
-    width: 100%;
-    height: 600px;
-    margin: auto;
-    display: none;
-    position: absolute;
-    /* background-image: url("assets/_Brown Fantasy Temple Desktop Wallpaper.png"); */
-    background-repeat: repeat;
-    /* background-position: 0 0; */
-    /* background-size: auto 100%; */
-    /* animation: animateBackground 30s linear infinite; */
-    animation: backGroundLoop 40s infinite alternate;
-}
-
-/* @keyframes animateBackground {
-    from {background-position: 0 0;}
-    to {background-position: -10000px 0;}
-} */
-
-@keyframes backGroundLoop {
-    0% {background-image: url("assets/backgrounds/temple-forest.png");}
-    25% {background-image: url("assets/backgrounds/temple-mountains.png");}
-    5% {background-image: url("assets/backgrounds/temple-desert.png");}
-    75% {background-image: url("assets/backgrounds/temple-background2.png");}
-    100% {background-image: url("assets/backgrounds/temple-background.png");}
-}
-
-#scoreSpan {
-    border: 1px solid black;
-    font-family: Arial;
-    font-size: 20px;
-}
-
-#character {
-    width: 120px;
-    height: 150px;
-    position: relative;
-    top: 430px;
-    left: 70px;
-}
-
-@keyframes jump {
-    0%{top: 450px}
-    50%{top: 200px}
-    100%{top: 450px}
-}
-
-.animate {
-    animation: jump 700ms linear;
-}
-
-#obstacle {
-    width: 90px;
-    height: 90px;
-    position: relative;
-    top: 438px;
-    left: 500px;
-    animation: block 1.5s infinite linear;
-}
-
-#rock {
-    width: 90px;
-    height: 90px;
+ @keyframes colorLoop {
+    0% {background-color: #5c8230;}
+    30% {background-color: #8e604c;}
+    60% {background-color: #d29062;}
+    100% {background-color: #857e66;}
+ }
+ 
+ #scoreSpan {
+     font-family: Arial;
+     font-size: 25px;
+ }
+ 
+ #character {
+     width: 120px;
+     height: 150px;
+     position: relative;
+     top: 430px;
+     left: 70px;
+ }
+ 
+ @keyframes jump {
+     0%{top: 450px}
+     50%{top: 200px}
+     100%{top: 450px}
+ }
+ 
+ .animate {
+     animation: jump 700ms linear;
+ }
+ 
+ #obstacle {
+     width: 90px;   
+     position: relative;
+     top: 438px;
+     left: 1500px;
+     animation: block 2s infinite linear;
+ }
+ 
+ #rock {
+    width: 90px; 
     position: relative;
     top: 438px;
-    left: 500px;
-    animation: block 1.5s infinite linear;
-}
+    left: 1500px;
+    animation: block 2s infinite linear;
+    border: 1px solid black;
+ }
 
-@keyframes block{
-    0%{left: 100%}
-    100%{left: -122px}
-}
+ .running {
+    animation-play-state: running;
+  }
 
-p {
-    text-align: center;
-    font-family: Arial;
-    font-size: 20px;
-    animation: disappear 5s;
-    /* animation-delay: 2s; */
-}
-
-@keyframes disappear {
-    0% {opacity: 1;}
-    100% {opacity: 0;}
-}
+  .pendingStop {
+    animation-iteration-count:0;
+  }
+  
+  .stopped {
+    animation: none;
+  }
+ 
+ @keyframes block {
+     from{left: 100%}
+     to{left: -122px}
+ }
+ 
+ p {
+     text-align: center;
+     font-family: Arial;
+     font-size: 20px;
+     animation: disappear 5s;
+     /* animation-delay: 2s; */
+ }
+ 
+ @keyframes disappear {
+     0% {opacity: 1;}
+     100% {opacity: 0;}
+ }
