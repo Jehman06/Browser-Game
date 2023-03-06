@@ -9,15 +9,11 @@ let obstacle = document.createElement("img");
 obstacle.src = "assets/temple-barrel.png";
 obstacle.setAttribute("id", "obstacle");
 document.getElementById("game").append(obstacle);
-obstacle.style.animationDelay = Math.random() * 10 + "s";
-setTimeout(obstacle.style.animationDelay = Math.random() * 10 + "s", 500);
 
 let rock = document.createElement("img");
 rock.src = "assets/temple-rock.png";
 rock.setAttribute("id", "rock");
 document.getElementById("game").append(rock);
-rock.style.animationDelay = Math.random() * 10 + "s";
-setTimeout(rock.style.animationDelay = Math.random() * 10 + "s", 500);
 
 //Counter/Score
 let counter = document.querySelector('#scoreSpan');
@@ -44,7 +40,14 @@ function startGame() {
     this.toggleScreen('start-screen', false);
     this.toggleScreen('game',true)
     this.toggleScreen('game-over-screen', false)
+    obstacle.style.animationDelay = Math.floor(Math.random() * 5) + "s";
+    rock.style.animationDelay = Math.floor(Math.random() * 5) + "s";
+    background.style.animation = "backGroundLoop 40s infinite alternate";
+    body.style.animation = "colorLoop 40s infinite alternate";
 }
+
+background = document.getElementById("game");
+body = document.body
 
 function toggleScreen(id, toggle){
     let gameScreen = document.getElementById(id);
@@ -88,10 +91,14 @@ let gameOver = setInterval(function() {
         obstacle.style.animation = "stopped";
         rock.style.animation = "stopped";
         character.src = "assets/temple-dead.gif";
+        body.style.animation = "none";
         stopCount();
         setTimeout(stop, 1000);
     } else {
-        obstacle.style.animation = "block 2s infinite linear";
-        rock.style.animation = "block 2s infinite 0.75s linear";
+        // obstacle.style.animation = "block 2s infinite linear";
+        // rock.style.animation = "block 2s infinite linear";
     }
 }, 10);
+
+instructions = document.querySelector("#instructions")
+setTimeout(instructions.style.display = "none", 3000);
