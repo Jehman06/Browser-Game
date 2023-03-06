@@ -8,7 +8,6 @@ body {
     align-items: center;
     font-family: Arial;
     background-color: #af876e;
-    /* animation: colorLoop 40s infinite alternate; */
  }
  
  #screen-images {
@@ -112,7 +111,6 @@ body {
      position: relative;
      top: 438px;
      left: 1500px;
-     animation: block 2s infinite linear;
  }
  
  #rock {
@@ -120,8 +118,6 @@ body {
     position: relative;
     top: 438px;
     left: 1500px;
-    animation: block 2s infinite linear;
-    border: 1px solid black;
  }
 
  .running {
@@ -145,11 +141,4 @@ body {
      text-align: center;
      font-family: Arial;
      font-size: 20px;
-     animation: disappear 5s;
-     animation-delay: 2s;
- }
- 
- @keyframes disappear {
-     0% {opacity: 1;}
-     100% {opacity: 0;}
  }

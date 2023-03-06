@@ -20,6 +20,7 @@ let counter = document.querySelector('#scoreSpan');
 let count = 0;
 let intervalCount;
 
+//Hadeel Ammari helped me stop the counter whenever the game is over, and start it from 0 when the user click the start button from the GameOver page.
 function counterStart() {
     count++;
     counter.innerText = `Score: ${count}`;
@@ -34,7 +35,7 @@ function stopCount() {
     counter.innerText = `Score: ${count}`;
 }
 
-//This function starts the game. It goes from the Start Game screen to the Game screen.
+//This function starts the game. It goes from the Start Game screen to the Game screen. *I got part of this code from David Reid on Youtube*
 function startGame() {
     intervalCount = setInterval(counterStart, 100)
     this.toggleScreen('start-screen', false);
@@ -44,10 +45,8 @@ function startGame() {
     rock.style.animationDelay = Math.floor(Math.random() * 5) + "s";
     background.style.animation = "backGroundLoop 40s infinite alternate";
     body.style.animation = "colorLoop 40s infinite alternate";
+    character.src = "assets/temple-run.gif";
 }
-
-background = document.getElementById("game");
-body = document.body
 
 function toggleScreen(id, toggle){
     let gameScreen = document.getElementById(id);
@@ -55,7 +54,21 @@ function toggleScreen(id, toggle){
     gameScreen.style.display = display;
 }
 
-//The function jump() makes the character jump. It utilizes the class .animate that I created in CSS.
+obstacle.style.animation = "block 2s infinite linear";
+rock.style.animation = "block 2s infinite linear";
+
+//Add another difficulty after 10 seconds, the obstacles are faster
+setTimeout(() => {
+    obstacle.style.animation = "block 1.3s infinite linear";
+  }, 10000);
+setTimeout(() => {
+    rock.style.animation = "block 1.3s infinite linear";
+  }, 10000);
+
+background = document.getElementById("game");
+body = document.body
+
+//The function jump() makes the character jump. It utilizes the class .animate that I created in CSS. *Some of this code is from Shawn Beaton on LogRocket*
 function jump() {
     character.src = "assets/temple-jump.gif";
     if(character.classList == "animate"){
@@ -76,29 +89,22 @@ document.addEventListener('keydown', function(e){
     }
 })
 
+//Add a GameOver screen. *I got this code from David Reid on Youtube*
 function stop() {
     this.toggleScreen('start-screen', false);
     this.toggleScreen('game',false);
     this.toggleScreen('game-over-screen', true);
 }
 
-//Checks if the character touches the obstacle and if so, alerts "Game Over" and starts the game again.
+//Checks if the character touches the obstacle and if so, alerts "Game Over" and starts the game again. *I got part of this code from Shawn Beaton on LogRocket*
 let gameOver = setInterval(function() {
     let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
     let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
     let rockLeft = parseInt(window.getComputedStyle(rock).getPropertyValue('left'));
     if(obstacleLeft < 30 && obstacleLeft >- 30 && characterTop >= 360 || rockLeft < 5 && rockLeft >- 5 && characterTop >= 360) {
-        obstacle.style.animation = "stopped";
-        rock.style.animation = "stopped";
         character.src = "assets/temple-dead.gif";
         body.style.animation = "none";
         stopCount();
         setTimeout(stop, 1000);
-    } else {
-        // obstacle.style.animation = "block 2s infinite linear";
-        // rock.style.animation = "block 2s infinite linear";
     }
 }, 10);
-
-instructions = document.querySelector("#instructions")
-setTimeout(instructions.style.display = "none", 3000);
